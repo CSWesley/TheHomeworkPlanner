@@ -1,0 +1,29 @@
+Writing data:
+
+DocumentReference docRef = db.collection("users").document("alovelace");
+Map<String, Object> data = new HashMap<>();
+data.put("first", "Ada");
+data.put("last", "Lovelace");
+data.put("born", 1815);
+
+ApiFuture<WriteResult> result = docRef.set(data);
+System.out.println("Update time : " + result.get().getUpdateTime());
+
+Reading data:
+
+ApiFuture<QuerySnapshot> query = db.collection("users").get();
+QuerySnapshot querySnapshot = query.get();
+
+List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
+
+for (QueryDocumentSnapshot document : documents) {
+    System.out.println("User: " + document.getId());
+    System.out.println("First: " + document.getString("first"));
+
+    if (document.contains("middle")) {
+        System.out.println("Middle: " + document.getString("middle"));
+    }
+    System.out.println("Last: " + document.getString("last"));
+    System.out.println("Born: " + document.getLong("born"));
+    System.out.println("\n");
+}
