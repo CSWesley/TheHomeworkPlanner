@@ -7,6 +7,8 @@ import com.cswesley.Validation.SignupUtils.CreateAccount;
 import com.cswesley.Validation.SignupUtils.SendConfirmation;
 
 import javax.swing.*;
+import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 /**
  * This class handles the logging in and signing up of the user. It also adds the components to the frame.
@@ -44,11 +46,15 @@ public class LoginAndSignup {
             if (e.getSource() == confirmSignup) {
                 // Send email to confirm.
                 CreateAccount ca = new CreateAccount();
-                boolean exists = ca.checkIfExists(createUsername.getText(), setEmail.getText());
+                boolean exists = false;
+                try {
+                    exists = ca.checkIfExists(createUsername.getText(), setEmail.getText());
+                } catch (IOException | ExecutionException | InterruptedException ex) {
+                    ex.printStackTrace();
+                }
 
                 if (exists) {
                     JOptionPane.showMessageDialog(loginAndSignupFrame.getContentPane(), "An account already exists with this username or email!", "Error", JOptionPane.ERROR_MESSAGE);
-
                 } else {
                     // Email sending
                     if (!setEmail.getText().contains("@") || createUsername.getText().isEmpty() || createPassword.getText().isEmpty() || confirmPassword.getText().isEmpty() || !createPassword.getText().equals(confirmPassword.getText())) {
@@ -58,7 +64,11 @@ public class LoginAndSignup {
                         sendConfirmation.send(setEmail.getText());
                         String code = sendConfirmation.getCode();
 
-                        ca.createAccount(createUsername.getText(), createPassword.getText(), setEmail.getText());
+                        try {
+                            ca.createAccount(createUsername.getText(), createPassword.getText(), setEmail.getText());
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
                     }
                 }
             }

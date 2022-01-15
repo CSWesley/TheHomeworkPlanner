@@ -14,6 +14,11 @@ your homework.
 - View assignments, subjects, and completed assignments.
 - And much more!
 
+### Extra Feature
+If you do not have internet, there is an offline mode that will allow you to 
+use the application. If you wish to enable this feature, the database will
+be saved to local storage on your computer.
+
 ### Installation
 
 ##### 1. Clone the repository and run it:
