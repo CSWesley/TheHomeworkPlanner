@@ -2,15 +2,15 @@ package com.cswesley.Validation.SignupUtils;
 
 import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.firestore.Firestore;
-import com.google.cloud.firestore.QueryDocumentSnapshot;
-import com.google.cloud.firestore.QuerySnapshot;
+import com.google.cloud.firestore.*;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 public class CreateAccount {
@@ -50,5 +50,13 @@ public class CreateAccount {
         FirebaseApp.initializeApp(options);
 
         Firestore db = FirestoreClient.getFirestore();
+
+        DocumentReference docRef = db.collection("users").document(username);
+        Map<String, Object> data = new HashMap<>();
+        data.put("username", username);
+        data.put("password", encryptedPassword);
+        data.put("born", 1815);
+
+        ApiFuture<WriteResult> result = docRef.set(data);
     }
 }

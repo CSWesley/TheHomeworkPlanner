@@ -9,6 +9,8 @@ data.put("born", 1815);
 ApiFuture<WriteResult> result = docRef.set(data);
 System.out.println("Update time : " + result.get().getUpdateTime());
 
+_______________________________________________________________________________________________________________
+
 Reading data:
 
 ApiFuture<QuerySnapshot> query = db.collection("users").get();
