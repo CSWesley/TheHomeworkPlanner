@@ -28,10 +28,10 @@ git clone https://github.com/CSWesley/TheHomeworkPlanner
 # Run the application
 java -jar TheHomeworkPlanner/libs/TheHomeworkPlanner.jar
 ```
-*Note the /libs/ directory has not been created yet.*
+*Note the /libs/ directory has not been created yet. (Please wait for first stable build)*
 
 ##### 2. EXE, PKG, and DMG:
-*Note these have not been created yet.*
+*Note these have not been created yet. (Please wait for first stable build)*
 
 ### Other
 Creator: [CSWesley](https://github.com/CSWesley)
