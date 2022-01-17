@@ -47,6 +47,7 @@ public class LoginAndSignup {
                 // Send email to confirm.
                 CreateAccount ca = new CreateAccount();
                 boolean exists = false;
+
                 try {
                     exists = ca.checkIfExists(createUsername.getText(), setEmail.getText());
                 } catch (IOException | ExecutionException | InterruptedException ex) {
@@ -65,7 +66,13 @@ public class LoginAndSignup {
                         String code = sendConfirmation.getCode();
 
                         try {
-                            ca.createAccount(createUsername.getText(), createPassword.getText(), setEmail.getText());
+                            // only create account if code is correct
+                            String input = JOptionPane.showInputDialog(loginAndSignupFrame.getContentPane(), "Enter the code sent to your email: ", "Confirmation Code", JOptionPane.PLAIN_MESSAGE);
+                            if (input.equals(code)) {
+                                ca.createAccount(createUsername.getText(), createPassword.getText(), setEmail.getText());
+                                JOptionPane.showMessageDialog(loginAndSignupFrame.getContentPane(), "Account created successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                            }
+
                         } catch (IOException ex) {
                             ex.printStackTrace();
                         }

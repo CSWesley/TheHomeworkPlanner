@@ -1,9 +1,13 @@
 package com.cswesley.Main;
 
 import com.cswesley.Validation.LoginAndSignup;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class HomeworkPlanner {
 
@@ -11,7 +15,13 @@ public class HomeworkPlanner {
     private final Font subTitleFont = new Font("Arial", Font.PLAIN, 20);
     private final LoginAndSignup loginAndSignup = new LoginAndSignup();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        GoogleCredentials credentials = GoogleCredentials.getApplicationDefault();
+        FirebaseOptions options = FirebaseOptions.builder()
+                .setCredentials(credentials)
+                .build();
+        FirebaseApp.initializeApp(options);
+
         HomeworkPlanner hwp = new HomeworkPlanner();
         hwp.openLoginPage();
     }

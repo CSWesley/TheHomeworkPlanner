@@ -26,17 +26,18 @@ public class Email {
             }
         }
 
-        Properties var3 = new Properties();
-        var3.setProperty("mail.smtp.host", "smtp.gmail.com");
-        var3.setProperty("mail.smtp.port", "465");
-        var3.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        var3.setProperty("mail.smtp.socketFactory.port", "465");
-        var3.setProperty("mail.smtp.auth", "true");
-        var3.setProperty("mail.smtp.starttls.enable", "true");
+        Properties properties = new Properties();
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "465");
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.starttls.required", "true");
+        properties.put("mail.smtp.ssl.protocols", "TLSv1.2");
+        properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 
         String finalUsername = username;
         String finalPass = pass;
-        Session session = Session.getDefaultInstance(var3, new javax.mail.Authenticator() {
+        Session session = Session.getDefaultInstance(properties, new javax.mail.Authenticator() {
             protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
                 return new javax.mail.PasswordAuthentication(finalUsername, finalPass);
             }

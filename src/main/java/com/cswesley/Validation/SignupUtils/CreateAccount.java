@@ -1,5 +1,6 @@
 package com.cswesley.Validation.SignupUtils;
 
+import com.cswesley.Utils.EncryptDecrypt;
 import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.*;
@@ -16,12 +17,6 @@ import java.util.concurrent.ExecutionException;
 public class CreateAccount {
 
     public boolean checkIfExists(String username, String email) throws IOException, ExecutionException, InterruptedException {
-        GoogleCredentials credentials = GoogleCredentials.getApplicationDefault();
-        FirebaseOptions options = FirebaseOptions.builder()
-                .setCredentials(credentials)
-                .build();
-        FirebaseApp.initializeApp(options);
-
         Firestore db = FirestoreClient.getFirestore();
 
         ApiFuture<QuerySnapshot> query = db.collection("users").get();
@@ -34,8 +29,6 @@ public class CreateAccount {
                 return true;
             } else if (document.get("email").equals(email)) {
                 return true;
-            } else {
-                return false;
             }
         }
 
@@ -43,20 +36,16 @@ public class CreateAccount {
     }
 
     public void createAccount(String username, String password, String email) throws IOException {
-        GoogleCredentials credentials = GoogleCredentials.getApplicationDefault();
-        FirebaseOptions options = FirebaseOptions.builder()
-                .setCredentials(credentials)
-                .build();
-        FirebaseApp.initializeApp(options);
-
         Firestore db = FirestoreClient.getFirestore();
+
+        String encryptedPassword = EncryptDecrypt.encrypt(password);
 
         DocumentReference docRef = db.collection("users").document(username);
         Map<String, Object> data = new HashMap<>();
         data.put("username", username);
         data.put("password", encryptedPassword);
-        data.put("born", 1815);
+        data.put("email", email);
 
-        ApiFuture<WriteResult> result = docRef.set(data);
+        docRef.set(data);
     }
 }
