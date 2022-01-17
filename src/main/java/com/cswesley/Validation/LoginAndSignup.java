@@ -71,8 +71,22 @@ public class LoginAndSignup {
                             if (input.equals(code)) {
                                 ca.createAccount(createUsername.getText(), createPassword.getText(), setEmail.getText());
                                 JOptionPane.showMessageDialog(loginAndSignupFrame.getContentPane(), "Account created successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                            } else {
+                                String input2 = JOptionPane.showInputDialog(loginAndSignupFrame.getContentPane(), "The code you entered is incorrect! Try again.", "Error", JOptionPane.ERROR_MESSAGE);
+                                if (input2.equals(code)) {
+                                    ca.createAccount(createUsername.getText(), createPassword.getText(), setEmail.getText());
+                                    JOptionPane.showMessageDialog(loginAndSignupFrame.getContentPane(), "Account created successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                                } else {
+                                    String input3 = JOptionPane.showInputDialog(loginAndSignupFrame.getContentPane(), "The code you entered is incorrect! This is your last attempt.", "Error", JOptionPane.ERROR_MESSAGE);
+                                    if (input3.equals(code)) {
+                                        ca.createAccount(createUsername.getText(), createPassword.getText(), setEmail.getText());
+                                        JOptionPane.showMessageDialog(loginAndSignupFrame.getContentPane(), "Account created successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                                    } else {
+                                        JOptionPane.showMessageDialog(loginAndSignupFrame.getContentPane(), "The code you entered is incorrect. Try again soon.", "Error", JOptionPane.ERROR_MESSAGE);
+                                        System.exit(0);
+                                    }
+                                }
                             }
-
                         } catch (IOException ex) {
                             ex.printStackTrace();
                         }
