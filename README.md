@@ -16,8 +16,8 @@ your homework.
 
 ### Extra Feature
 If you do not have internet, there is an offline mode that will allow you to 
-use the application. If you wish to enable this feature, the database will
-be saved to local storage on your computer.
+use the application. If you wish to enable this feature, your information store on the 
+database will be saved to local storage on your computer.
 
 ### Installation
 
