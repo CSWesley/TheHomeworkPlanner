@@ -7,8 +7,6 @@ import com.cswesley.Utils.Utilities;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.Objects;
 
 public class Application {
@@ -34,7 +32,7 @@ public class Application {
     }
 
     private void addElements(Container c) {
-        JLabel title = new JLabel(new ImageIcon(Objects.requireNonNull(getClass().getResource("/HomeworkPlanner/images/pencil.png"))));
+        JLabel title = new JLabel(new ImageIcon(System.getProperty("user.dir") + "/src/main/resources/images/pencil.png"));
         title.setSize(600, 146);
         title.setLocation(150, -30);
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));

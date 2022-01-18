@@ -1,6 +1,7 @@
 package com.cswesley.Validation;
 
 import com.cswesley.MainApp.Application;
+import com.cswesley.Utils.EncryptDecrypt;
 import com.cswesley.Utils.GhostText;
 import com.cswesley.Validation.LoginUtils.AccountLogin;
 import com.cswesley.Validation.SignupUtils.CreateAccount;
@@ -119,18 +120,26 @@ public class LoginAndSignup {
                 // Check if password matches username. If yes, continue to app. If not, say "password does not match" or something.
 
                 AccountLogin accountLogin = new AccountLogin();
-                boolean matches = accountLogin.matches(enterUsername.getText(), enterPass.getText());
+                boolean matches = false;
+                try {
+                    matches = accountLogin.matches(enterUsername.getText(), enterPass.getText());
+                } catch (ExecutionException | InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+
                 if (matches) {
                     // Continue to main application.
                     try {
                         loginAndSignupFrame.dispose();
+
                         Application application = new Application();
                         application.openMainApplication();
+
                     } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException | InterruptedException ex) {
                         ex.printStackTrace();
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "The username and password does not match!", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "The username and password do not match!", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
