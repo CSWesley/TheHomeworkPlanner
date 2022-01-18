@@ -12,16 +12,16 @@ public class SubjectListener {
 
         return e -> {
             if (e.getSource() == button) {
-
+                // here is where the subject is created.
             }
         };
     }
 
-    private void insertClass() throws SQLException {
+    private void insertSubjectToDatabase() {
 
     }
 
-    private boolean doesExist() throws SQLException {
+    private boolean doesExist() {
         return false;
     }
 
