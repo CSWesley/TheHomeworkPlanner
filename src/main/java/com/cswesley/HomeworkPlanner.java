@@ -1,4 +1,4 @@
-package com.cswesley.Main;
+package com.cswesley;
 
 import com.cswesley.Validation.LoginAndSignup;
 import com.google.auth.oauth2.GoogleCredentials;
