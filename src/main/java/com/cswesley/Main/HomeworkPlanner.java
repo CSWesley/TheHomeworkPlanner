@@ -1,6 +1,5 @@
 package com.cswesley.Main;
 
-import com.cswesley.Utils.EncryptDecrypt;
 import com.cswesley.Validation.LoginAndSignup;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;

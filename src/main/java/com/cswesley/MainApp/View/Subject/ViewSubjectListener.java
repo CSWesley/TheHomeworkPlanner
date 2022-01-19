@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
 
 public class ViewSubjectListener {
     private final Font titleFont = new Font("Times New Roman", Font.PLAIN, 40);
@@ -18,14 +19,14 @@ public class ViewSubjectListener {
             if (e.getSource() == button) {
                 try {
                     createViewFrame();
-                } catch (SQLException ex) {
+                } catch (ExecutionException | InterruptedException ex) {
                     ex.printStackTrace();
                 }
             }
         };
     }
 
-    public void createViewFrame() throws SQLException {
+    public void createViewFrame() throws ExecutionException, InterruptedException {
         JFrame viewFrame = new JFrame("View Subjects");
         viewFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         Container c = viewFrame.getContentPane();
@@ -41,7 +42,7 @@ public class ViewSubjectListener {
 
         for (int i = 0; i < classes.size(); i++) {
             JButton subjectName = new JButton(ar.get(i));
-            subjectName.addActionListener(classActionListener(subjectName, viewFrame));
+            subjectName.addActionListener(classActionListener(subjectName));
             c.add(subjectName);
         }
 
@@ -50,9 +51,10 @@ public class ViewSubjectListener {
         viewFrame.setVisible(true);
     }
 
-    private ActionListener classActionListener(JButton button, JFrame subjectsFrame) {
+    private ActionListener classActionListener(JButton button) {
         return e -> {
             if (e.getSource() == button) {
+                // display the subject details
             }
         };
     }
